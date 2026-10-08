@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myflorist - Toko Bunga Online</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", Arial, sans-serif;
+        }
+
+        body {
+            background: #fff5f8;
+            color: #5a2638;
+        }
+
+        /* ================= NAVBAR ================= */
+        nav {
+            width: 100%;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(255, 105, 150, 0.15);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e75480;
+        }
+
+        .logo span {
+            color: #f8a5bd;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #6d3046;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e75480;
+        }
+
+        .cart {
+            background: #e75480;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+            min-height: 620px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 8%;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(rgba(255, 210, 225, 0.80),
+                rgba(255, 241, 246, 0.88)),
+                url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-text {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero-text small {
+            color: #d94d77;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .hero-text h1 {
+            font-size: 60px;
+            line-height: 1.1;
+            margin: 15px 0;
+            color: #8d3152;
+        }
+
+        .hero-text h1 span {
+            color: #e75480;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #704052;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            background: #e75480;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #c83f68;
+            transform: translateY(-3px);
+        }
+
+        /* ================= FLOWER DECORATION ================= */
+        .flower {
+            position: absolute;
+            font-size: 70px;
+            opacity: 0.5;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .flower1 {
+            top: 80px;
+            right: 8%;
+        }
+
+        .flower2 {
+            bottom: 40px;
+            right: 30%;
+            font-size: 50px;
+        }
+
+        .flower3 {
+            top: 35%;
+            left: 3%;
+            font-size: 45px;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* ================= SECTION ================= */
+        section {
+            padding: 70px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            color: #8d3152;
+        }
+
+        .section-title p {
+            margin-top: 10px;
+            color: #9c6478;
+        }
+
+        /* ================= PRODUCTS ================= */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(216, 81, 123, 0.12);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(216, 81, 123, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            color: #8d3152;
+            margin-bottom: 8px;
+        }
+
+        .card-content p {
+            color: #9b6879;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #e75480;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .card button {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            background: #f8a5bd;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .card button:hover {
+            background: #e75480;
+        }
+
+        /* ================= ABOUT ================= */
+        .about {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            background: #ffe9f0;
+        }
+
+        .about img {
+            width: 45%;
+            border-radius: 25px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 40px;
+            color: #8d3152;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            color: #704052;
+            margin-bottom: 20px;
+        }
+
+        /* ================= ORDER ================= */
+        .order-box {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 10px 35px rgba(216, 81, 123, 0.15);
+        }
+
+        .order-box h2 {
+            text-align: center;
+            color: #8d3152;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #f2bfd0;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background: #8d3152;
+            color: white;
+            padding: 45px 8%;
+            text-align: center;
+        }
+
+        footer h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #ffdce7;
+            margin: 8px;
+        }
+
+        .social {
+            margin-top: 20px;
+            font-size: 25px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 900px) {
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-text h1 {
+                font-size: 45px;
+            }
+
+            .about {
+                flex-direction: column;
+            }
+
+            .about img {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                min-height: 550px;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 40px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 50px 6%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav>
+        <div class="logo">
+            my<span>florist</span> 🌸
+        </div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#about">Tentang Kami</a></li>
+            <li><a href="#pesan">Pesan</a></li>
+        </ul>
+
+        <div class="cart" onclick="lihatKeranjang()">
+            🛒 <span id="jumlahCart">0</span>
+        </div>
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="home">
+
+        <div class="flower flower1">🌸</div>
+        <div class="flower flower2">🌷</div>
+        <div class="flower flower3">🌺</div>
+
+        <div class="hero-text">
+            <small>WELCOME TO MYFLORIST</small>
+
+            <h1>
+                Bunga indah untuk
+                <span>momen spesialmu.</span>
+            </h1>
+
+            <p>
+                Hadirkan kebahagiaan melalui rangkaian bunga
+                cantik dari myflorist. Cocok untuk ulang tahun,
+                anniversary, wisuda, hingga kejutan untuk orang tersayang.
+            </p>
+
+            <a href="#produk" class="btn">
+                Lihat Koleksi 💐
+            </a>
+        </div>
+
+    </section>
+
+
+    <!-- ================= PRODUCTS ================= -->
+    <section id="produk">
+
+        <div class="section-title">
+            <h2>Our Beautiful Flowers 🌷</h2>
+            <p>Pilih bunga favoritmu untuk orang tersayang</p>
+        </div>
+
+        <div class="products">
+
+            <!-- Produk 1 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=800&q=80">
+
+                <div class="card-content">
+                    <h3>Pink Rose Bouquet</h3>
+
+                    <p>
+                        Buket mawar pink yang elegan
+                        dan penuh kasih sayang.
+                    </p>
+
+                    <div class="price">
+                        Rp150.000
+                    </div>
+
+                    <button onclick="tambahKeranjang('Pink Rose Bouquet', 150000)">
+                        + Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- Produk 2 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80">
+
+                <div class="card-content">
+                    <h3>Sweet Pink Bouquet</h3>
+
+                    <p>
+                        Kombinasi bunga pink yang
+                        manis dan romantis.
+                    </p>
+
+                    <div class="price">
+                        Rp175.000
+                    </div>
+
+                    <button onclick="tambahKeranjang('Sweet Pink Bouquet', 175000)">
+                        + Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- Produk 3 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=800&q=80">
+
+                <div class="card-content">
+                    <h3>Elegant White Flower</h3>
+
+                    <p>
+                        Rangkaian bunga putih yang
+                        simpel, bersih dan elegan.
+                    </p>
+
+                    <div class="price">
+                        Rp200.000
+                    </div>
+
+                    <button onclick="tambahKeranjang('Elegant White Flower', 200000)">
+                        + Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- Produk 4 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80">
+
+                <div class="card-content">
+                    <h3>Romantic Bouquet</h3>
+
+                    <p>
+                        Buket romantis untuk pasangan
+                        dan orang yang spesial.
+                    </p>
+
+                    <div class="price">
+                        Rp250.000
+                    </div>
+
+                    <button onclick="tambahKeranjang('Romantic Bouquet', 250000)">
+                        + Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+    <section class="about" id="about">
+
+        <img src="https://images.unsplash.com/photo-1455582916367-25f75bfc6710?auto=format&fit=crop&w=1000&q=80">
+
+        <div class="about-text">
+
+            <h2>About myflorist 🌸</h2>
+
+            <p>
+                myflorist adalah toko bunga online yang hadir
+                untuk membantu kamu menyampaikan perasaan
+                melalui bunga.
+            </p>
+
+            <p>
+                Kami menyediakan berbagai macam rangkaian bunga
+                yang dapat disesuaikan dengan kebutuhan dan
+                momen spesial kamu.
+            </p>
+
+            <a href="#pesan" class="btn">
+                Pesan Sekarang
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ORDER ================= -->
+    <section id="pesan">
+
+        <div class="section-title">
+            <h2>Pesan Bunga 💐</h2>
+            <p>Isi data pemesanan di bawah ini</p>
+        </div>
+
+        <div class="order-box">
+
+            <h2>Form Pemesanan</h2>
+
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input
+                    type="text"
+                    id="nama"
+                    placeholder="Masukkan nama kamu">
+            </div>
+
+            <div class="form-group">
+                <label>Nomor WhatsApp</label>
+                <input
+                    type="text"
+                    id="telepon"
+                    placeholder="08xxxxxxxxxx">
+            </div>
+
+            <div class="form-group">
+                <label>Pilih Produk</label>
+
+                <select id="produkPilihan">
+
+                    <option value="Pink Rose Bouquet">
+                        Pink Rose Bouquet - Rp150.000
+                    </option>
+
+                    <option value="Sweet Pink Bouquet">
+                        Sweet Pink Bouquet - Rp175.000
+                    </option>
+
+                    <option value="Elegant White Flower">
+                        Elegant White Flower - Rp200.000
+                    </option>
+
+                    <option value="Romantic Bouquet">
+                        Romantic Bouquet - Rp250.000
+                    </option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Alamat Pengiriman</label>
+
+                <textarea
+                    id="alamat"
+                    placeholder="Masukkan alamat lengkap"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Catatan</label>
+
+                <textarea
+                    id="catatan"
+                    placeholder="Contoh: Tolong tambahkan kartu ucapan Happy Birthday"></textarea>
+            </div>
+
+            <button class="btn" onclick="pesanWhatsApp()">
+                💬 Pesan via WhatsApp
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+
+        <h2>myflorist 🌸</h2>
+
+        <p>
+            Beautiful flowers, beautiful moments.
+        </p>
+
+        <p>
+            📍 Jakarta, Indonesia
+        </p>
+
+        <p>
+            📞 08xxxxxxxxxx
+        </p>
+
+        <div class="social">
+            Instagram • WhatsApp • TikTok
+        </div>
+
+        <p style="margin-top:25px;">
+            © 2026 myflorist. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+
+        let jumlah = 0;
+        let keranjang = [];
+
+        function tambahKeranjang(nama, harga) {
+
+            jumlah++;
+
+            keranjang.push({
+                nama: nama,
+                harga: harga
+            });
+
+            document.getElementById("jumlahCart").innerText = jumlah;
+
+            alert(
+                nama +
+                " berhasil ditambahkan ke keranjang 💐"
+            );
+        }
+
+
+        function lihatKeranjang() {
+
+            if (keranjang.length === 0) {
+
+                alert("Keranjang kamu masih kosong 🌸");
+
+                return;
+            }
+
+            let isi = "🛒 KERANJANG MYFLORIST\n\n";
+
+            let total = 0;
+
+            keranjang.forEach(function(item, index) {
+
+                isi +=
+                    (index + 1) +
+                    ". " +
+                    item.nama +
+                    " - Rp" +
+                    item.harga.toLocaleString("id-ID") +
+                    "\n";
+
+                total += item.harga;
+            });
+
+            isi +=
+                "\nTotal: Rp" +
+                total.toLocaleString("id-ID");
+
+            alert(isi);
+        }
+
+
+        function pesanWhatsApp() {
+
+            let nama =
+                document.getElementById("nama").value;
+
+            let telepon =
+                document.getElementById("telepon").value;
+
+            let produk =
+                document.getElementById("produkPilihan").value;
+
+            let alamat =
+                document.getElementById("alamat").value;
+
+            let catatan =
+                document.getElementById("catatan").value;
+
+
+            if (
+                nama === "" ||
+                telepon === "" ||
+                alamat === ""
+            ) {
+
+                alert(
+                    "Silakan lengkapi data pemesanan terlebih dahulu 🌸"
+                );
+
+                return;
+            }
+
+
+            let pesan =
+                "Halo myflorist 🌸%0A%0A" +
+
+                "Saya ingin melakukan pemesanan:%0A%0A" +
+
+                "👤 Nama: " +
+                nama +
+                "%0A" +
+
+                "📱 WhatsApp: " +
+                telepon +
+                "%0A" +
+
+                "💐 Produk: " +
+                produk +
+                "%0A" +
+
+                "📍 Alamat: " +
+                alamat +
+                "%0A" +
+
+                "📝 Catatan: " +
+                catatan;
+
+
+            /*
+                GANTI NOMOR DI BAWAH
+                dengan nomor WhatsApp toko kamu.
+
+                Format:
+                628xxxxxxxxxx
+
+                Contoh:
+                6281234567890
+            */
+
+            let nomorToko =
+                "6281234567890";
+
+
+            window.open(
+                "https://wa.me/" +
+                nomorToko +
+                "?text=" +
+                pesan,
+                "_blank"
+            );
+        }
+
+    </script>
+
+</body>
+</html>
+```
